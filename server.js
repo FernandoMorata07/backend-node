@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+// Controladores y middlewares
 const {
     newUserController,
     getUserController,
@@ -97,7 +98,7 @@ app.use((error, req, res, next) => {
 });
 
 // Lanzamos el servidor
-const puerto = process.env.PORT || 4000; // Cambiar para usar el puerto de la variable de entorno
+const puerto = process.env.PORT || 4000;
 app.listen(puerto, () => {
     console.log(`Servidor funcionando perfectamente en el puerto ${puerto} 🤩`);
 });
