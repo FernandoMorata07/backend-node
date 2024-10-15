@@ -41,44 +41,32 @@ app.get('/', (req, res) => {
     });
 });
 
+// Middleware de autenticación
+app.use(authUser);
+
 // Rutas de usuario
 app.post('/user', newUserController);
-app.get('/user/:id', authUser, getUserController);
+app.get('/user/:id', getUserController);
 app.post('/login', loginController);
-app.get('/user', authUser, getMeController);
+app.get('/user', getMeController);
 app.get('/user/:id/links', getUserLinksController);
 // Modificar email o username
-app.put('/user/edit', authUser, editUser);
+app.put('/user/edit', editUser);
 // Modificar la biografía del usuario
-app.put('/user/bio', authUser, editBio);
+app.put('/user/bio', editBio);
 // Modificar la contraseña del usuario
-app.put('/users/password', authUser, editUserPass);
+app.put('/users/password', editUserPass);
 // Eliminar un usuario
-app.delete('/users', authUser, deleteUser);
+app.delete('/users', deleteUser);
 
 // Rutas de Links
-app.post('/', authUser, newLinkController);
-// app.get('/', authUser, getLinksController);
-app.get('/link/:id', authUser, getSingleLinkController);
-app.delete('/link/:id', authUser, deleteLinkController);
+app.post('/link', newLinkController);
+app.get('/links', getLinksController);
+app.get('/link/:id', getSingleLinkController);
+app.delete('/link/:id', deleteLinkController);
 
 // Rutas de votos
-app.post('/votos/:idLink', authUser, addVotes);
-
-// Configurar cabeceras y cors
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method'
-    );
-    res.header(
-        'Access-Control-Allow-Methods',
-        'GET, POST, OPTIONS, PUT, DELETE'
-    );
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
+app.post('/votos/:idLink', addVotes);
 
 // Middleware de 404
 app.use((req, res) => {
