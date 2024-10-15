@@ -58,7 +58,7 @@ app.delete('/users', authUser, deleteUser);
 
 // Rutas de Links
 app.post('/', authUser, newLinkController);
-app.get('/', authUser, getLinksController);
+// app.get('/', authUser, getLinksController);
 app.get('/link/:id', authUser, getSingleLinkController);
 app.delete('/link/:id', authUser, deleteLinkController);
 
