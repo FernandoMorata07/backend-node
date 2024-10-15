@@ -41,8 +41,9 @@ app.get('/', (req, res) => {
     });
 });
 
-// Middleware de autenticación
-app.use(authUser);
+// Middleware de autenticación solo para rutas que lo requieren
+app.use('/user', authUser); // Solo se aplica a las rutas que comienzan con /user
+app.use('/link', authUser); // Solo se aplica a las rutas que comienzan con /link
 
 // Rutas de usuario
 app.post('/user', newUserController);
@@ -61,7 +62,7 @@ app.delete('/users', deleteUser);
 
 // Rutas de Links
 app.post('/link', newLinkController);
-app.get('/links', getLinksController);
+app.get('/link', getLinksController);
 app.get('/link/:id', getSingleLinkController);
 app.delete('/link/:id', deleteLinkController);
 
